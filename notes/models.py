@@ -1,3 +1,4 @@
+from turtle import pos
 from django.db import models
 # from django.contrib.auth.models import AbstractUser
 # from rest_framework.authtoken.models import Token
@@ -18,7 +19,7 @@ class Notes(models.Model):
         ordering = ['-created']
 
     def __str__(self):
-        return self.name
+        return str(self.id)
 
     def create_note( name, owner,description=None,tags = None,**extra_fields):
         if not name:
@@ -27,6 +28,16 @@ class Notes(models.Model):
         note.save()
         return note
 
+    def update_note(id,name,description=None,tags = None,**extra_fields):
+        note = Notes(id=id, name= name , description= description ,tags =tags)
+        print(note)
+        note.save()
+        return note
+
     def get_all_objects(owner):
         queryset = Notes.objects.filter(owner = owner)
         return queryset
+
+    def delete_note(id):
+        Notes.get(id=id).delete()
+        return True
