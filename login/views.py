@@ -1,4 +1,3 @@
-# from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -20,8 +19,6 @@ from rest_framework.status import (
     HTTP_200_OK
 )
 
-
-
 @csrf_exempt
 @api_view(["POST"])
 @permission_classes((AllowAny,))
@@ -39,17 +36,23 @@ def login(request):
     return Response({'token': token.key},
                     status=HTTP_200_OK)
 
+@csrf_exempt
+@api_view(["GET"])
+def user_detail_api(request):
+  serializer = UserSerializer(request.user)
+  return Response(serializer.data , status=HTTP_200_OK)
 
 # Class based view to Get User Details using Token Authentication
-class UserDetailAPI(APIView):
-  authentication_classes = (TokenAuthentication,)
-  permission_classes = (AllowAny,)
-  def get(self,request,*args,**kwargs):
-    user = User.objects.get(id=request.user.id)
-    serializer = UserSerializer(user)
-    return Response(serializer.data)
+# class UserDetailAPI(APIView):
+#   authentication_classes = (TokenAuthentication)
+#   permission_classes = (IsAuthenticated)
+#   def get(self,request,*args,**kwargs):
+#     # user = User.objects.get(id=request.user.id)
+#     serializer = UserSerializer(user)
+#     return Response(serializer.data)
 
 #Class based view to register user
 class RegisterUserAPIView(generics.CreateAPIView):
   permission_classes = (AllowAny,)
   serializer_class = RegisterSerializer
+
