@@ -2,9 +2,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import *
 from .serializers import *
-
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.status import (
     HTTP_400_BAD_REQUEST,
@@ -32,7 +30,6 @@ def post_notes(request):
             user = request.user
             data = request.data 
             data['owner'] = user.id
-            # print (data)
             serializer = NotesSerializer(data=data)
             if serializer.is_valid():
                 serializer.save()
