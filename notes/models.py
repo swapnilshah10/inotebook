@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+# abc
 class Notes(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE ,default= 1)
     name = models.CharField(max_length=200)
