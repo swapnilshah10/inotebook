@@ -1,13 +1,12 @@
 import React from "react";
 import axios from "axios";
 import { useState } from "react";
-import Notes from "./Notes";
+import Note from "./Note";
 
-let url = "https://inotebook123.herokuapp.com/login/get-details/";
-// let url = "http://127.0.0.1:8000/get-notes/";
+let url = "https://inotebook123.herokuapp.com/get-notes/";
 let token = "efc434f15a4e968fbf5aee9abbcfd27c8c93eac8";
 
-function Apistest(props) {
+function Notes(props) {
   const [data, setDats] = useState("");
   let yourConfig = {
     headers: {
@@ -25,12 +24,19 @@ function Apistest(props) {
   };
   return (
     <div>
-      Token received in another component: {props.token}
-      <br></br><button onClick = {getData}>Get data</button>
+      <br></br><button onClick = {getData}>Get Notes</button>
       <br></br>Data :<br></br>{data.first_name}<br></br> {data.last_name} <br></br>{data.username} <br></br>{data.id}
-      <Notes token={props.token}/>
+      <div className="row">
+                        {data && data.map((element) => {
+                            if(!data) return null;
+                            else{
+                            return <div className="col-md-3" key={element.id}>
+                                <Note data = {element}/>
+                            </div>}
+                        })}
+      </div>
     </div>
   );
 }
 
-export default Apistest;
+export default Notes;

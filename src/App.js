@@ -1,6 +1,8 @@
 import "./App.css";
 import Apistest from "./components/Apistest";
 import Login from "./components/Login";
+import Notes from "./components/Notes";
+import Register from "./components/Register";
 import { useState } from "react";
 import { BrowserRouter as Router,  Routes, Route} from "react-router-dom";
 
@@ -16,9 +18,13 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element = { <Login childToParent={childToParent} />}>
+          <Route exact path="/" element = { <Login childToParent={childToParent} />}>
+          </Route>
+          <Route exact path="/register" element = { <Register childToParent={childToParent}/>}>
           </Route>
           <Route path="/apistest" element = {<Apistest token={token} />}>   
+          </Route>
+          <Route exact path="/notes" element = { <Notes token={token}/>}>
           </Route>
         </Routes>
       </Router>
