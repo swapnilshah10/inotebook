@@ -3,6 +3,7 @@ import Apistest from "./components/Apistest";
 import Login from "./components/Login";
 import Notes from "./components/Notes";
 import Register from "./components/Register";
+import CreateNote from "./components/CreateNote";
 import { useState } from "react";
 import { BrowserRouter as Router,  Routes, Route} from "react-router-dom";
 
@@ -25,6 +26,8 @@ function App() {
           <Route path="/apistest" element = {<Apistest token={token} />}>   
           </Route>
           <Route exact path="/notes" element = { <Notes token={token}/>}>
+          </Route>
+          <Route exact path="/createnote" element = { <CreateNote token={token}/>}>
           </Route>
         </Routes>
       </Router>

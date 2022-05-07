@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useState } from "react"
 
 import {
-  Link
+  Navigate,
 } from "react-router-dom";
 
 let url = "https://inotebook123.herokuapp.com/login/register/";
@@ -44,9 +44,14 @@ function Register(props) {
             };
             await axios
               .post(url, data)
-              .then(res=>{props.childToParent(res.data.token);})
+              .then(res=>{props.childToParent(res.data.token);setLogin(true);})
               .catch(err => console.log(err.request.responseText));
             };
+            const [isLoggedIn, setLogin] = useState(false);
+
+  if (isLoggedIn) {
+    return <Navigate to="/notes" />;
+  }
   return (
     <div>
         <div className="login-form">
@@ -72,10 +77,6 @@ function Register(props) {
       </div>
       <div className="action">
         <button onClick = {handleSubmit}>Register</button>
-        
-        <Link to = '/apistest'>
-        <button>Log in </button>
-        </Link>
       </div>
     </form>
   </div>
