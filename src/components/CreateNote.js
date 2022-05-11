@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 // http://127.0.0.1:8000/post-notes/
 let url = "https://inotebook123.herokuapp.com/post-notes/";
@@ -26,6 +27,11 @@ function CreateNote(props) {
       Authorization: "Token " + token,
     },
   };
+const [iscreated, setCreate] = useState(false);
+
+if (iscreated) {
+  return <Navigate to="/notes" />;
+}
 
   let handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +40,8 @@ function CreateNote(props) {
       description: description,
       tags: tags,
     };
-    postData(data);
+    await postData(data);
+    setCreate(true);
 };
     
     let postData = async (data) => {

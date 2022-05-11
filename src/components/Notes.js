@@ -4,13 +4,13 @@ import Note from "./Note";
 import { Link } from "react-router-dom";
 
 let url = "https://inotebook123.herokuapp.com/get-notes/";
-// let token = "efc434f15a4e968fbf5aee9abbcfd27c8c93eac8";
+let token = "efc434f15a4e968fbf5aee9abbcfd27c8c93eac8";
 
 function Notes(props) {
   const [data, setDats] = useState("");
   let yourConfig = {
     headers: {
-      Authorization: "Token " + props.token,
+      Authorization: "Token " + token,
     },
   };
   let getData = async () => {
@@ -35,7 +35,7 @@ function Notes(props) {
                             if(!data) return null;
                             else{
                             return <div className="col-md-3" key={element.id}>
-                                <Note data = {element}/>
+                                <Note data = {element} getdata={getData} token ={token}/>
                             </div>}
                         })}
       </div>

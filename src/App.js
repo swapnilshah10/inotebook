@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Notes from "./components/Notes";
 import Register from "./components/Register";
 import CreateNote from "./components/CreateNote";
+import Updatenote from "./components/Updatenote";
 import { useState } from "react";
 import { BrowserRouter as Router,  Routes, Route} from "react-router-dom";
 
@@ -28,6 +29,8 @@ function App() {
           <Route exact path="/notes" element = { <Notes token={token}/>}>
           </Route>
           <Route exact path="/createnote" element = { <CreateNote token={token}/>}>
+          </Route>
+          <Route  path="/updatenote/:id/" element = { <Updatenote token={token}/>}>
           </Route>
         </Routes>
       </Router>
