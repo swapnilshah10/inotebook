@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Note from "./Note";
+import Note2 from "./Note2";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -30,8 +31,9 @@ function Notes(props) {
 
   return (
     <div>
-      Notes
-      <Box sx={{ "& button": { m: 1 } }}>
+      <Box sx={{  backgroundImage: 'url(/background.jpg)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover',
+            backgroundPosition: 'center',height: '100vh', "& button": { m: 1 } }}>
+
         <ul
           className="list-group list-group-horizontal"
           style={{ justifycontent: "center", margin: "2px" }}
@@ -43,7 +45,7 @@ function Notes(props) {
                 return (
                   <div className="col-md-3" key={element.id}>
                     <li className="list-group-item">
-                      <Note
+                      <Note2
                         data={element}
                         getdata={getData}
                         token={props.token}

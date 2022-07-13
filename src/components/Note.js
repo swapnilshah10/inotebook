@@ -5,6 +5,10 @@ import { Link } from "react-router-dom";
 import Button from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Box from '@mui/material/Box';
+import { createTheme } from '@mui/material/styles';
+import { indigo } from '@mui/material/colors';
+
+const colors =  indigo[400];
 
 function Note(props) {
   let url = `https://inotebook123.herokuapp.com/delete-notes/${props.data.id}/`;
@@ -25,7 +29,7 @@ function Note(props) {
   };
 
   return (
-    <div>
+    <div  sx={{  backgroundColor: "blue", color :colors}}>
       {props.data.name}
       <div>{props.data.description}</div>
       <div>{props.data.tags}</div>

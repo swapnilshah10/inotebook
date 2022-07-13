@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 import { Navigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from '@mui/material/Box';
-// let token = "efc434f15a4e968fbf5aee9abbcfd27c8c93eac8";
+import TextField from '@mui/material/TextField'; 
+
 
 function Updatenote() {
   const params = useParams();
@@ -86,28 +87,13 @@ function Updatenote() {
             <h1>Update Note</h1>
             <div className="content">
               <div className="input-field">
-                <input
-                  type="text"
-                  placeholder="Enter name of note"
-                  value={name}
-                  onChange={onnameChange}
-                />
+              <TextField id="username" label="Enter name of note" variant="standard" onChange={onnameChange} value={name} />
               </div>
               <div className="input-field">
-                <input
-                  type="text"
-                  placeholder="Enter description"
-                  value={description}
-                  onChange={ondescChange}
-                />
+              <TextField id="description" label="Enter description" onChange={ondescChange} variant="standard" value={description} />
               </div>
               <div className="input-field">
-                <input
-                  type="text"
-                  placeholder="Enter tag"
-                  value={tags}
-                  onChange={ontagChange}
-                />
+              <TextField id="tags" label="Enter tag" variant="standard" onChange={ontagChange} value={tags}/>
               </div>
             </div>
             <div className="action">

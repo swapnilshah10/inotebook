@@ -3,6 +3,7 @@ import axios from "axios";
 import { Navigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField'; 
 
 let url = "https://inotebook123.herokuapp.com/post-notes/";
 
@@ -65,28 +66,13 @@ if (iscreated) {
               <h1>Create Note   </h1>
               <div className="content">
                 <div className="input-field">
-                  <input
-                    type="text"
-                    placeholder="Enter name of note"
-                    value={name}
-                    onChange={onnameChange}
-                  />
+                <TextField id="username" label="Enter name of note" variant="standard" onChange={onnameChange}/>
                 </div>
                 <div className="input-field">
-                  <input
-                    type="text"
-                    placeholder="Enter description"
-                    value={description}
-                    onChange={ondescChange}
-                  />
+                <TextField id="description" label="Enter description" onChange={ondescChange} variant="standard" />
                 </div>
                 <div className="input-field">
-                  <input
-                    type="text"
-                    placeholder="Enter tag"
-                    value={tags}
-                    onChange={ontagChange}
-                  />
+                <TextField id="tags" label="Enter tag" variant="standard" onChange={ontagChange}/>
                 </div>
               </div>
               <div className="action">
