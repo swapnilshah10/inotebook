@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Navigate } from "react-router-dom";
-
-let token = "efc434f15a4e968fbf5aee9abbcfd27c8c93eac8";
+import Button from "@mui/material/Button";
+import Box from '@mui/material/Box';
+// let token = "efc434f15a4e968fbf5aee9abbcfd27c8c93eac8";
 
 function Updatenote() {
   const params = useParams();
+  let token =  localStorage.getItem('token');
   let url1 = `https://inotebook123.herokuapp.com/get-note/${params.id}/`;
  
   let getData = async () => {
@@ -77,7 +79,7 @@ function Updatenote() {
   return (
     <div>
       <br></br>
-
+      <Box sx={{ '& button': { m: 1 } }}>
       <div>
         <div className="login-form">
           <form>
@@ -109,11 +111,12 @@ function Updatenote() {
               </div>
             </div>
             <div className="action">
-              <button onClick={handleSubmit}>Post Note</button>
+              <Button variant="contained" onClick={handleSubmit}>Update Note</Button>
             </div>
           </form>
         </div>
       </div>
+      </Box>
     </div>
   );
 }

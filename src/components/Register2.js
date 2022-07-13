@@ -1,35 +1,36 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios'
-import { useState } from "react"
-import { Link as RouterLink }  from "react-router-dom" ;
-import {
-  Navigate,
-} from "react-router-dom";
+import * as React from "react";
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
+import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 let url = "https://inotebook123.herokuapp.com/login/register/";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
+      {"Copyright © "}
       <Link color="inherit" href="http://localhost:3000/">
         inotebooks
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -37,54 +38,51 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp(props) {
-
   const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");   
+  const [password, setPassword] = useState("");
   const [first, setFirst] = useState("");
   const [last, setlast] = useState("");
   const [email, setemail] = useState("");
-     
-    let onpassChange = e => {
-      setPassword(e.target.value);
-    };
 
-    let onnameChange = e => {
-      setUsername(e.target.value);
-    };
-    let onfirstChange = e => {
-      setFirst(e.target.value);
-    };
-    let onlastChange = e => {
-      setlast(e.target.value);
-    };
-    let onemailChange = e => {
-      setemail(e.target.value);
-    };
-    
-   let handleSubmit = async (e) => { 
-      e.preventDefault();
-      const data = {
-        username: username,
-        password: password,
-        password2: password,
-        first_name : first,
-        last_name : last,
-        email : email
-      };
-      await axios
-        .post(url, data)
-        .then(res=>{
-          console.log(res);
-          props.childToParent(res.data.token);
-          localStorage.setItem('token', res.data.token);
-        setLogin(true);})
-        .catch(err => console.log(err.request.responseText));
-      };
-      const [isLoggedIn, setLogin] = useState(false);
+  let onpassChange = (e) => {
+    setPassword(e.target.value);
+  };
 
-if (isLoggedIn) {
-return <Navigate to="/notes" />;
-}
+  let onnameChange = (e) => {
+    setUsername(e.target.value);
+  };
+  let onfirstChange = (e) => {
+    setFirst(e.target.value);
+  };
+  let onlastChange = (e) => {
+    setlast(e.target.value);
+  };
+  let onemailChange = (e) => {
+    setemail(e.target.value);
+  };
+
+  let handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      username: username,
+      password: password,
+      password2: password,
+      first_name: first,
+      last_name: last,
+      email: email,
+    };
+    await axios
+      .post(url, data)
+      .then((res) => {
+        setLogin(true);
+      })
+      .catch((err) => console.log(err.request.responseText));
+  };
+  const [isLoggedIn, setLogin] = useState(false);
+
+  if (isLoggedIn) {
+    return <Navigate to="/" />;
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -93,18 +91,23 @@ return <Navigate to="/notes" />;
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}
+          >
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -115,7 +118,7 @@ return <Navigate to="/notes" />;
                   id="firstName"
                   label="First Name"
                   autoFocus
-                  onChange={onfirstChange} 
+                  onChange={onfirstChange}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -137,7 +140,7 @@ return <Navigate to="/notes" />;
                   label="Username"
                   name="Username"
                   autoComplete="Username"
-                  onChange={onnameChange} 
+                  onChange={onnameChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -163,14 +166,13 @@ return <Navigate to="/notes" />;
                   onChange={onpassChange}
                 />
               </Grid>
-              
             </Grid>
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
-              onClick = {handleSubmit}
+              onClick={handleSubmit}
             >
               Sign Up
             </Button>
