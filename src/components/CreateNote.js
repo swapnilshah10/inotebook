@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 
 // http://127.0.0.1:8000/post-notes/
 let url = "https://inotebook123.herokuapp.com/post-notes/";
-let token = "efc434f15a4e968fbf5aee9abbcfd27c8c93eac8";
+let token =  localStorage.getItem('token')
 
 function CreateNote(props) {
   const [name, setname] = useState("");

@@ -2,11 +2,18 @@ import React , { useEffect, useState} from "react";
 import axios from "axios";
 import Note from "./Note";
 import { Link } from "react-router-dom";
+import Button from '@mui/material/Button';
+
+
+
+  // localStorage.setItem('itemName', value)
+  // localStorage.getItem('itemName')
 
 let url = "https://inotebook123.herokuapp.com/get-notes/";
-let token = "efc434f15a4e968fbf5aee9abbcfd27c8c93eac8";
 
 function Notes(props) {
+  const token = localStorage.getItem('token')
+  console.log(token);
   const [data, setDats] = useState("");
   let yourConfig = {
     headers: {
@@ -28,19 +35,24 @@ function Notes(props) {
 
   return (
     <div>
-      <br></br><button onClick = {getData}>Reload Notes</button>
-      <br></br>Data :<br></br>{data.first_name}<br></br> {data.last_name} <br></br>{data.username} <br></br>{data.id}
-      <div className="row">
+      {/* <br></br>Data :<br></br>{data.first_name}<br></br> {data.last_name} <br></br>{data.username} <br></br>{data.id} */}
+      Notes
+      {/* <div className="row flex" style={{justifycontent: "center"}}> */}
+      <ul className="list-group list-group-horizontal" style={{justifycontent: "center" , margin: "2px"}}>
                         {data && data.map((element) => {
                             if(!data) return null;
                             else{
                             return <div className="col-md-3" key={element.id}>
-                                <Note data = {element} getdata={getData} token ={token}/>
+                              <li className="list-group-item">
+                                <Note data = {element} getdata={getData} token ={props.token}/>
+                                </li>
                             </div>}
                         })}
-      </div>
+      </ul>
+      {/* </div> */}
       <Link to="/createnote">
-              <button>Make a note</button>
+      `       <Button variant="contained">Make a note</Button>
+              {/* <button></button> */}
             </Link>
     </div>
   );

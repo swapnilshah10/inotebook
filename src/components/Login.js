@@ -12,7 +12,7 @@ function Login(props) {
   const [password, setPassword] = useState("");
 
   let onpassChange = (e) => {
-    setPassword(e.target.value);
+    setPassword(e.target.value); 
   };
 
   let onnameChange = (e) => {
@@ -26,8 +26,10 @@ function Login(props) {
     };
     await axios
       .post(url, data)
-      .then((res) => {
+      .then((res) => { 
+        console.log(res) 
         props.childToParent(res.data.token);
+        localStorage.setItem('token', res.data.token)
         setLogin(true);
       })
       .catch((err) => console.log(err.request.responseText));

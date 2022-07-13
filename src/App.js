@@ -1,8 +1,11 @@
 import "./App.css";
 import Apistest from "./components/Apistest";
+import React  from 'react';
 import Login from "./components/Login";
 import Notes from "./components/Notes";
+import Login2 from "./components/Login2";
 import Register from "./components/Register";
+import Register2 from "./components/Register2";
 import CreateNote from "./components/CreateNote";
 import Updatenote from "./components/Updatenote";
 import { useState } from "react";
@@ -13,16 +16,19 @@ function App() {
 
   const childToParent = async (childdata) => {
     setData(childdata);
-    console.log(token);
   };
 
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route exact path="/" element = { <Login childToParent={childToParent} />}>
+          <Route exact path="/login" element = { <Login childToParent={childToParent} />}>
+          </Route>
+          <Route exact path="/" element = { <Login2/>}>
           </Route>
           <Route exact path="/register" element = { <Register childToParent={childToParent}/>}>
+          </Route>
+          <Route exact path="/register2" element = { <Register2 childToParent={childToParent}/>}>
           </Route>
           <Route path="/apistest" element = {<Apistest token={token} />}>   
           </Route>

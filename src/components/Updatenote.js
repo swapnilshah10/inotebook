@@ -25,9 +25,9 @@ function Updatenote() {
  
 
   let url = `https://inotebook123.herokuapp.com/update-notes/${params.id}/`;
-  const [name, setname] = useState("data.name");
-  const [description, setdesc] = useState("data.description");
-  const [tags, settag] = useState("data.tags");
+  const [name, setname] = useState("loading name");
+  const [description, setdesc] = useState("loading description");
+  const [tags, settag] = useState("loading tags");
   
   let setvalue = (data) => (
     setname(data.name),
@@ -45,13 +45,13 @@ function Updatenote() {
   let ontagChange = (e) => {
     settag(e.target.value);
   };
+
   let yourConfig = {
     headers: {
       Authorization: "Token " + token,
     },
   };
   const [isupdated, setUpdate] = useState(false);
-
   if (isupdated) {
     return <Navigate to="/notes" />;
   }
@@ -63,15 +63,14 @@ function Updatenote() {
       description: description,
       tags: tags,
     };
-    console.log(data);
-    postData(data);
+    await postData(data);
     setUpdate(true);
   };
 
   let postData = async (data) => {
     await axios
       .put(url, data, yourConfig)
-      .then((res) => {<Navigate to="/notes"/>})
+      // .then(() => {<Navigate to="/notes"/>})
       .catch((err) => console.log(err));
   };
 
