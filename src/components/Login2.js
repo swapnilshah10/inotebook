@@ -13,11 +13,12 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 // import { LockOutlinedIcon } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
+import Alert from '@mui/material/Alert';
 import axios from "axios";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { Link as RouterLink }  from "react-router-dom" ;
+import Error from './Error'
 
 // let url = "http://127.0.0.1:8000/login/";
 
@@ -42,6 +43,7 @@ const theme = createTheme();
 export default function SignInSide(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState({});
 
   let onpassChange = (e) => {
     setPassword(e.target.value);
@@ -50,6 +52,7 @@ export default function SignInSide(props) {
   let onnameChange = (e) => {
     setUsername(e.target.value);
   };
+
   let handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
@@ -60,14 +63,20 @@ export default function SignInSide(props) {
       .post(url, data)
       .then((res) => {  
         console.log(res)
-        // props.childToParent(res.data.token);
         localStorage.setItem('token', res.data.token)
         setLogin(true);
       })
-      .catch((err) => console.log(err.request));
+      .catch((err) => {
+        // console.log((JSON.parse(err.request.response)));
+      setError(JSON.parse(err.request.response))});
+      // setErr(true);
+      // console.log(error.error)
   };
   const [isLoggedIn, setLogin] = useState(false);
+  // const [isError, setErr] = useState(false);
+  // console.log(error)
 
+  
   if (isLoggedIn) {
     return <Navigate to="/notes" />;
   }
@@ -101,11 +110,14 @@ export default function SignInSide(props) {
             }}
           >
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-              <LockOutlinedIcon />
+              <LockOutlinedIcon/>
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+           
+            <Error error={error.error}/>
+           
             <Box component="form" noValidate  sx={{ mt: 1 }}>
               <TextField
                 margin="normal"

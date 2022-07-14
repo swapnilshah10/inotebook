@@ -14,6 +14,8 @@ import axios from "axios";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import Error from './Error'
+
 
 let url = "https://inotebook123.herokuapp.com/login/register/";
 
@@ -43,6 +45,7 @@ export default function SignUp(props) {
   const [first, setFirst] = useState("");
   const [last, setlast] = useState("");
   const [email, setemail] = useState("");
+  const [error, setError] = useState({});
 
   let onpassChange = (e) => {
     setPassword(e.target.value);
@@ -76,7 +79,10 @@ export default function SignUp(props) {
       .then((res) => {
         setLogin(true);
       })
-      .catch((err) => console.log(err.request.responseText));
+      .catch((err) => 
+      {
+        setError(JSON.parse(err.request.response))
+      });
   };
   const [isLoggedIn, setLogin] = useState(false);
 
@@ -108,6 +114,7 @@ export default function SignUp(props) {
             onSubmit={handleSubmit}
             sx={{ mt: 3 }}
           >
+            <Error error={error.error} username={error.username} password={error.password} email = {error.email}/>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
