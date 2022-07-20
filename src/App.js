@@ -19,19 +19,20 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="App" sx={{  backgroundImage: 'url(/background.jpg)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover',
+    backgroundPosition: 'center',height: '100vh', "& button": { m: 1 } }}>
       <Router>
         <Routes>
-          <Route exact path="/login" element = { <Login childToParent={childToParent} />}>
-          </Route>
+          {/* <Route exact path="/login" element = { <Login childToParent={childToParent} />}>
+          </Route> */}
           <Route exact path="/" element = { <Login2/>}>
           </Route>
-          <Route exact path="/register" element = { <Register childToParent={childToParent}/>}>
-          </Route>
+          {/* <Route exact path="/register" element = { <Register childToParent={childToParent}/>}>
+          </Route> */}
           <Route exact path="/register2" element = { <Register2 childToParent={childToParent}/>}>
           </Route>
-          <Route path="/apistest" element = {<Apistest token={token} />}>   
-          </Route>
+          {/* <Route path="/apistest" element = {<Apistest token={token} />}>   
+          </Route> */}
           <Route exact path="/notes" element = { <Notes token={token}/>}>
           </Route>
           <Route exact path="/createnote" element = { <CreateNote token={token}/>}>

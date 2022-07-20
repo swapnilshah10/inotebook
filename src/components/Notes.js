@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 // import Note from "./Note";
+
 import Note2 from "./Note2";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
@@ -42,9 +43,9 @@ function Notes(props) {
 
 
   return (
-    <div>
+    <div style={{height: '100%'}}>
       <Box sx={{  backgroundImage: 'url(/background.jpg)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover',
-            backgroundPosition: 'center',height: '100vh', "& button": { m: 1 } }}>
+            backgroundPosition: 'center',height: '100vh',"& button": { m: 1 } }}>
               <Button variant="text" onClick={logout} style ={{float  : 'right'}}>Logout</Button>
               <br></br>
         <ul
@@ -57,8 +58,7 @@ function Notes(props) {
               else {
                 return (
                   <div className="col-md-3" key={element.id}>
-                      <li className="list-group-item" style={{ justifycontent: "center", margin: "2px",backgroundImage: 'url(/blue.jpg)',
-                      backgroundRepeat: 'no-repeat', }}>
+                      <li className="list-group-item" style={{ justifycontent: "center", margin: "2px",}}>
                       <Note2
                         data={element}
                         getdata={getData}

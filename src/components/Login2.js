@@ -13,7 +13,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 // import { LockOutlinedIcon } from '@mui/icons-material';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import Alert from '@mui/material/Alert';
+// import Alert from '@mui/material/Alert';
 import axios from "axios";
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
@@ -68,7 +68,8 @@ export default function SignInSide(props) {
       })
       .catch((err) => {
         // console.log((JSON.parse(err.request.response)));
-      setError(JSON.parse(err.request.response))});
+      setError(JSON.parse(err.request.response))
+    });
       // setErr(true);
       // console.log(error.error)
   };
