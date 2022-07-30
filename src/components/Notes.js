@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import Note from "./Note";
 
 import Note2 from "./Note2";
 import { Link } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { Navigate } from "react-router-dom";
-
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
 let url = "https://inotebook123.herokuapp.com/get-notes/";
 
 function Notes(props) {
@@ -25,55 +25,78 @@ function Notes(props) {
         setDats(res.data);
       })
       .catch((err) => console.log(err));
-  };
+    };
 
   useEffect(() => {
     getData();
   }, []);
-  
+
   let logout = async (e) => {
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
     setLogout(true);
-  }
+  };
   const [isLoggedout, setLogout] = useState(false);
 
   if (isLoggedout) {
     return <Navigate to="/" />;
   }
+ 
+  var style={backgroundImage: "url(/background.jpg)",
+  backgroundSize: "cover",
+  backgroundRepeat: "repeat-y"}
 
-
+  if(data.length < 9){
+    style = {backgroundImage: "url(/background.jpg)",
+    backgroundSize: "cover",
+    backgroundRepeat: "repeat-y",height: '100vh'}
+  }
+ 
   return (
-    <div style={{height: '100%'}}>
-      <Box sx={{  backgroundImage: 'url(/background.jpg)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover',
-            backgroundPosition: 'center',height: '100vh',"& button": { m: 1 } }}>
-              <Button variant="text" onClick={logout} style ={{float  : 'right'}}>Logout</Button>
-              <br></br>
-        <ul
-          className="list-group list-group-horizontal"
-          style={{ justifycontent: "center", margin: "2px" }}
-        >
+    <div style={style}>
+      <CssBaseline />
+      <Box sx={{ flexGrow: 1 }}>
+      <Box
+        sx={{
+          "& button": { m: 1 },
+          alignitem: "center",  
+          justifycontent: "center",
+        }}
+      >
+        <Button variant="text" onClick={logout} style={{ float: "right" , height: "10px" }}>
+          Logout
+        </Button>
+        <br></br>
+       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+       
           {data &&
             data.map((element) => {
               if (!data) return null;
               else {
                 return (
-                  <div className="col-md-3" key={element.id}>
-                      <li className="list-group-item" style={{ justifycontent: "center", margin: "2px",}}>
+                  <Grid item xs sm={4} md={3} key={element.id}>
+                    <li
+                      className="list-group-item"
+                      style={{
+                        justifycontent: "center",
+                        margin: "10px",
+                        padding: "0px",
+                      }}
+                    >
                       <Note2
                         data={element}
                         getdata={getData}
                         token={props.token}
                       />
                     </li>
-                  </div>
+                  </Grid>
                 );
               }
             })}
-        </ul>
-
+      </Grid>
         <Link to="/createnote">
           <Button variant="contained">Make a note</Button>
         </Link>
+      </Box>
       </Box>
     </div>
   );

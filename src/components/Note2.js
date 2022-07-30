@@ -29,7 +29,8 @@ export default function BasicCard(props) {
   };
 
   return (
-    <Card sx={{ minWidth: 275 , backgroundImage: 'url(/lightblue.webp)'}}>
+    <>
+    <Card sx={{   backgroundColor:"#00FA9A" }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {props.data.name}
@@ -45,8 +46,9 @@ export default function BasicCard(props) {
         <Link to={`/updatenote/${props.data.id}/`}>
           <Button variant="contained" size="small">Update</Button>
         </Link>
-        <Button  sx={{ mb: 0.5 }} onClick={delData} size="small"><DeleteIcon /></Button>
+        <Button  sx={{ mb: 0.5  , color : "grey"}} onClick={delData} size="small"><DeleteIcon /></Button>
       </CardActions>
     </Card>
+    </>
   );
 }

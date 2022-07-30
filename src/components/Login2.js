@@ -20,7 +20,6 @@ import { Navigate } from "react-router-dom";
 import { Link as RouterLink }  from "react-router-dom" ;
 import Error from './Error'
 
-// let url = "http://127.0.0.1:8000/login/";
 
 let url = "https://inotebook123.herokuapp.com/login/";
 
@@ -67,18 +66,19 @@ export default function SignInSide(props) {
         setLogin(true);
       })
       .catch((err) => {
-        // console.log((JSON.parse(err.request.response)));
+
       setError(JSON.parse(err.request.response))
     });
-      // setErr(true);
-      // console.log(error.error)
+
   };
   const [isLoggedIn, setLogin] = useState(false);
-  // const [isError, setErr] = useState(false);
-  // console.log(error)
 
   
   if (isLoggedIn) {
+    return <Navigate to="/notes" />;
+  }
+
+  if(localStorage.getItem('token')){
     return <Navigate to="/notes" />;
   }
 
@@ -156,11 +156,7 @@ export default function SignInSide(props) {
                 Sign In
               </Button>
               <Grid container  >
-                {/* <Grid item xs>
-                  <Link to="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid> */}
+               
                 <Grid item  >
                   <RouterLink to="/register2" variant="body2">
                     {"Don't have an account? Sign Up"}

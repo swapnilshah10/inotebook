@@ -79,7 +79,7 @@ function Updatenote() {
 
   return (
     <div>
-      <Box sx={{ '& button': { m: 1 } , background:"powderblue" ,height: '100vh' ,display: " flex" , justifyContent: 'center' , alignItems: 'up'}}>
+      <Box sx={{ '& button': { m: 1 } , background:"#3CB371" ,height: '100vh' ,display: " flex" , justifyContent: 'center' , alignItems: 'up'}}>
       <div>
         <div className="login-form">
           <form>

@@ -8,6 +8,16 @@ import { Link } from "react-router-dom";
 
 let url = "https://inotebook123.herokuapp.com/login/";
 function Login(props) {
+  token = localStorage.getItem('token');    
+  console.log(token);
+  const [isLoggedIn, setLogin] = useState(false);
+  if (token!= "undefined"){
+    setLogin(true);
+  }
+  if (isLoggedIn) {
+    return <Navigate to="/notes" />;
+  }
+  else{
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -35,11 +45,7 @@ function Login(props) {
       })
       .catch((err) => console.log(err.request.responseText));
   };
-  const [isLoggedIn, setLogin] = useState(false);
-
-  if (isLoggedIn) {
-    return <Navigate to="/notes" />;
-  }
+ 
 
   return (
     <div>
@@ -75,5 +81,5 @@ function Login(props) {
     </div>
   );
 }
-
+}
 export default Login;

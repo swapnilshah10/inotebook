@@ -4,10 +4,8 @@ import { Navigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField'; 
-// import { blue} from '@mui/material/colors';
 
 let url = "https://inotebook123.herokuapp.com/post-notes/";
-
 
 function CreateNote(props) {
   let token =  localStorage.getItem('token')
@@ -59,7 +57,7 @@ if (iscreated) {
 
     return (
       <div  >
-        <Box sx={{ '& button': { m: 1 } , background:"powderblue" ,height: '100vh' ,display: " flex" , justifyContent: 'center' , alignItems: 'up'}} >
+        <Box sx={{ '& button': { m: 1 } , background:"#3CB371" ,height: '100vh' ,display: " flex" , justifyContent: 'center' , alignItems: 'up'}} >
         <div>
           <div className="login-form" style={{textcolor:"black" , fontSize:"900"}}>
             <form>
