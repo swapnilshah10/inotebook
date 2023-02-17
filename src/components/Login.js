@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-// let url = "http://127.0.0.1:8000/login/";
 
-let url = "https://inotebook123.herokuapp.com/login/";
+// let url = "https://inotebook123.herokuapp.com/login/";
+let url = "http://127.0.0.1:8000/login/";
 function Login(props) {
   token = localStorage.getItem('token');    
   console.log(token);

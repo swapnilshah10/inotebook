@@ -12,6 +12,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function BasicCard(props) {
   let url = `https://inotebook123.herokuapp.com/delete-notes/${props.data.id}/`;
+  url = `http://127.0.0.1:8000//delete-notes/${props.data.id}/`;
+
   const token = localStorage.getItem("token");
   let yourConfig = {
     headers: {

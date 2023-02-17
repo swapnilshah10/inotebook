@@ -11,6 +11,8 @@ function Updatenote() {
   const params = useParams();
   let token =  localStorage.getItem('token');
   let url1 = `https://inotebook123.herokuapp.com/get-note/${params.id}/`;
+  url1 = `http://127.0.0.1:8000/get-note/${params.id}/`;
+
  
   let getData = async () => {
     await axios
@@ -79,7 +81,7 @@ function Updatenote() {
 
   return (
     <div>
-      <Box sx={{ '& button': { m: 1 } , background:"#3CB371" ,height: '100vh' ,display: " flex" , justifyContent: 'center' , alignItems: 'up'}}>
+      <Box sx={{ '& button': { m: 1 } , background:"white" ,height: '100vh' ,display: " flex" , justifyContent: 'center' , alignItems: 'up'}}>
       <div>
         <div className="login-form">
           <form>

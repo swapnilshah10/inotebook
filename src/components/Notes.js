@@ -8,7 +8,10 @@ import Box from "@mui/material/Box";
 import { Navigate } from "react-router-dom";
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-let url = "https://inotebook123.herokuapp.com/get-notes/";
+
+// let url = "https://inotebook123.herokuapp.com/get-notes/";
+let url = "http://127.0.0.1:8000/get-notes/";
+
 
 function Notes(props) {
   const token = localStorage.getItem("token");
@@ -45,12 +48,12 @@ function Notes(props) {
   backgroundSize: "cover",
   backgroundRepeat: "repeat-y"}
 
-  if(data.length < 9){
+  if(data.length < 9 && window.innerWidth > 900){
     style = {backgroundImage: "url(/background.jpg)",
     backgroundSize: "cover",
     backgroundRepeat: "repeat-y",height: '100vh'}
   }
- 
+
   return (
     <div style={style}>
       <CssBaseline />
@@ -62,6 +65,8 @@ function Notes(props) {
           justifycontent: "center",
         }}
       >
+
+        <br></br>
         <Button variant="text" onClick={logout} style={{ float: "right" , height: "10px" }}>
           Logout
         </Button>
@@ -94,7 +99,7 @@ function Notes(props) {
             })}
       </Grid>
         <Link to="/createnote">
-          <Button variant="contained">Make a note</Button>
+          <Button variant="contained" sx={{ position: 'fixed', bottom: 0, right: "0%" ,alignItems : "center"}} >Make a note</Button>
         </Link>
       </Box>
       </Box>

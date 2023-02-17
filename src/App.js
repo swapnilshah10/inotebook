@@ -1,14 +1,11 @@
 import "./App.css";
-// import Apistest from "./components/Apistest";
 import React  from 'react';
-// import Login from "./components/Login";
-// import Notes2 from "./components/Notes2";
 import Notes from "./components/Notes";
 import Login2 from "./components/Login2";
-// import Register from "./components/Register";
 import Register2 from "./components/Register2";
 import CreateNote from "./components/CreateNote";
 import Updatenote from "./components/Updatenote";
+
 import { useState } from "react";
 import { BrowserRouter as Router,  Routes, Route} from "react-router-dom";
 

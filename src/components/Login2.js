@@ -22,6 +22,8 @@ import Error from './Error'
 
 
 let url = "https://inotebook123.herokuapp.com/login/";
+url = "http://127.0.0.1:8000//login/";
+
 
 
 function Copyright(props) {

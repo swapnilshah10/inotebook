@@ -15,7 +15,7 @@ code {
 
 .col-md-3{
   /* The image used */
-  background-image: url(/blue.jpg);
+  background-image: url(../public/blue.jpg);
 
   /* Full height */
   height: 100%; 

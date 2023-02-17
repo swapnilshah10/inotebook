@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField'; 
 
 let url = "https://inotebook123.herokuapp.com/post-notes/";
+url = "http://127.0.0.1:8000/post-notes/";
 
 function CreateNote(props) {
   let token =  localStorage.getItem('token')
@@ -57,7 +58,7 @@ if (iscreated) {
 
     return (
       <div  >
-        <Box sx={{ '& button': { m: 1 } , background:"#3CB371" ,height: '100vh' ,display: " flex" , justifyContent: 'center' , alignItems: 'up'}} >
+        <Box sx={{ '& button': { m: 1 } , background:"white" ,height: '100vh' ,display: " flex" , justifyContent: 'center' , alignItems: 'up'}} >
         <div>
           <div className="login-form" style={{textcolor:"black" , fontSize:"900"}}>
             <form>
