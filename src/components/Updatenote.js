@@ -1,111 +1,154 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { useParams, Navigate } from "react-router-dom";
 import Button from "@mui/material/Button";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField'; 
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
-
-function Updatenote() {
-  const params = useParams();
-  let token =  localStorage.getItem('token');
-  let url1 = `https://inotebook123.herokuapp.com/get-note/${params.id}/`;
-  url1 = `http://127.0.0.1:8000/get-note/${params.id}/`;
-
- 
-  let getData = async () => {
-    await axios
-      .get(url1, yourConfig)
-      .then((res) => {
-        setvalue(res.data);
-      })
-      .catch((err) => console.log(err));
-  };
-
-  useEffect(() => {
-     getData();
-  }, []);
-
- 
-
-  let url = `https://inotebook123.herokuapp.com/update-notes/${params.id}/`;
-  const [name, setname] = useState("loading name");
-  const [description, setdesc] = useState("loading description");
-  const [tags, settag] = useState("loading tags");
-  
-  let setvalue = (data) => (
-    setname(data.name),
-    setdesc(data.description),
-    settag(data.tags)
-  )
-
-  let ondescChange = (e) => {
-    setdesc(e.target.value);
-  };
-
-  let onnameChange = (e) => {
-    setname(e.target.value);
-  };
-  let ontagChange = (e) => {
-    settag(e.target.value);
-  };
+function UpdateNote() {
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [iscreated, setCreate] = useState(false);
+  const { id } = useParams();
+  let token = localStorage.getItem("token");
+  // const history = useHistory();
 
   let yourConfig = {
     headers: {
       Authorization: "Token " + token,
     },
   };
-  const [isupdated, setUpdate] = useState(false);
-  if (isupdated) {
-    return <Navigate to="/notes" />;
-  }
 
-  let handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = {
+  useEffect(() => {
+    axios
+      .get(`http://127.0.0.1:8000/get-note/${id}/`, yourConfig)
+      .then((res) => {
+        setName(res.data.name);
+        setDescription(res.data.description);
+        setTags(res.data.tags);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handleTagsChange = (event) => {
+    setTags(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const updatedNote = {
       name: name,
       description: description,
       tags: tags,
     };
-    await postData(data);
-    setUpdate(true);
+    await axios.put(
+      `http://127.0.0.1:8000/update-notes/${id}/`,
+      updatedNote,
+      yourConfig
+    );
+    setCreate(true);
+    // history.push("/notes
   };
 
-  let postData = async (data) => {
-    await axios
-      .put(url, data, yourConfig)
-      // .then(() => {<Navigate to="/notes"/>})
-      .catch((err) => console.log(err));
-  };
+  if (isLoading) {
+    return (
+      <div
+        sx={{
+          backgroundImage: "url(./updatee.jpg)",
+        }}
+      >
+        Loading...
+      </div>
+    );
+  }
+  if (iscreated) {
+    return <Navigate to="/notes" />;
+  }
 
   return (
     <div>
-      <Box sx={{ '& button': { m: 1 } , background:"white" ,height: '100vh' ,display: " flex" , justifyContent: 'center' , alignItems: 'up'}}>
-      <div>
-        <div className="login-form">
-          <form>
-            <h1>Update Note</h1>
-            <div className="content">
-              <div className="input-field">
-              <TextField id="username" label="Enter name of note" variant="standard" onChange={onnameChange} value={name} />
+      <Box
+        sx={{
+          backgroundImage: "url(/updatee.jpg)",
+          backgroundSize: "cover",
+          opacity: "0.9",
+          minHeight: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Box
+          sx={{
+            p: 5,
+            minWidth: 300,
+            maxWidth: 500,
+            boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.2)",
+            borderRadius: "10px",
+            background: "white",
+          }}
+        >
+          <Typography variant="h4" align="center" gutterBottom>
+            Update Note
+          </Typography>
+          <form onSubmit={handleSubmit}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <div style={{ marginBottom: "20px" }}>
+                <TextField
+                  id="name"
+                  label="Enter name of note"
+                  variant="standard"
+                  onChange={handleNameChange}
+                  value={name}
+                />
               </div>
-              <div className="input-field">
-              <TextField id="description" label="Enter description" onChange={ondescChange} variant="standard" value={description} />
+              <div style={{ marginBottom: "20px" }}>
+                <TextField
+                  id="description"
+                  label="Enter description"
+                  onChange={handleDescriptionChange}
+                  variant="standard"
+                  value={description}
+                />
               </div>
-              <div className="input-field">
-              <TextField id="tags" label="Enter tag" variant="standard" onChange={ontagChange} value={tags}/>
+              <div style={{ marginBottom: "20px" }}>
+                <TextField
+                  id="tags"
+                  label="Enter tag"
+                  variant="standard"
+                  onChange={handleTagsChange}
+                  value={tags}
+                />
               </div>
             </div>
-            <div className="action">
-              <Button variant="contained" onClick={handleSubmit}>Update Note</Button>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-end",
+                marginTop: "20px",
+              }}
+            >
+              <Button variant="contained" type="submit">
+                Update Note
+              </Button>
             </div>
           </form>
-        </div>
-      </div>
+        </Box>
       </Box>
     </div>
   );
 }
 
-export default Updatenote;
+export default UpdateNote;
